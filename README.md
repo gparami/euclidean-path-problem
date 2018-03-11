@@ -1,0 +1,2 @@
+# euclidean-path-problem
+The City of Ottawa owns and maintains many wading pools which need to be regularly maintained. The repair crew needs to find a route to visit the pools. You will have to help the crew to find a reasonable route to visit all pools. A route is reasonable if all pools are visited and the route is not too long. An optimal route is not required. This is a graph problem where the nodes are the pools and the edges have weights corresponding to the distance between pools.
