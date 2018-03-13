@@ -37,14 +37,14 @@ public class Pool implements Comparable<Pool> {
     public void setDistanceToRoot(double distanceToRoot) { this.distanceToRoot = distanceToRoot; }
 
     public double distanceFrom(Pool other) {
-        double X = Math.pow(Math.sin((this.latitude - other.getLatitude())/2), 2);
-        double Y = (Math.cos(this.latitude) * Math.cos(other.getLatitude()));
-        double Z = Math.pow(Math.sin((this.longitude - other.getLongitude())/2), 2);
+        double x1 = Math.toRadians(this.latitude), x2 = Math.toRadians(other.getLatitude());
+        double z1 = Math.toRadians(this.longitude), z2 = Math.toRadians(other.getLongitude());
+        double X = Math.pow(Math.sin((x1 - x2)/2), 2);
+        double Y = (Math.cos(x1) * Math.cos(x2));
+        double Z = Math.pow(Math.sin((z1 - z2)/2), 2);
         double dRadians = (2 * Math.asin(Math.sqrt(X + Y * Z)));
         return (6371.0 * dRadians);
     }
-
-    private double radiansAngle(double angleDegrees) { return 180.0 * (angleDegrees/Math.PI); }
 
     @Override
     public int compareTo(Pool o) {
