@@ -1,6 +1,5 @@
 package com.company;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -13,6 +12,12 @@ import java.util.ArrayList;
 
 public class Main {
 
+    /**
+     * Takes a JSON dataset from resources folder and created
+     * @param args
+     * @throws IOException
+     * @throws NullPointerException
+     */
     public static void main(String[] args) throws IOException, NullPointerException{
 
         try {
@@ -46,9 +51,12 @@ public class Main {
             WriteToText(poolArrayList);
             WriteToProlog(poolArrayList);
 
+            /*
+            //Console Output - For Testing Only
             for (Pool P: poolArrayList) {
                 System.out.println("NAME: " + P.getName() + " Longitude: " + P.getLon() + " Latitude " + P.getLat());
             }
+            */
 
         } catch (ParseException e) {
             System.out.println("File Error!");
@@ -60,7 +68,13 @@ public class Main {
 
     }
 
-    static void WriteToText(ArrayList<Pool> pools) throws IOException {
+    /**
+     * Creates a extracted database.txt file in the resources directory.
+     * @implNote resources file is in a parallel directory as the source directory.
+     * @param pools ArrayList of all the pool objects you want to add to the database.
+     * @throws IOException
+     */
+    private static void WriteToText(ArrayList<Pool> pools) throws IOException {
 
         try {
             File database = new File("resources/database.txt");
@@ -75,7 +89,13 @@ public class Main {
         }
     }
 
-    static void WriteToProlog(ArrayList<Pool> pools) {
+    /**
+     * Creates a prolog database.pl file in the resources directory.
+     * @implNote resources file is in a parallel directory as the source directory.
+     * @param pools ArrayList of all the pool objects you want to add to the database.
+     * @throws IOException
+     */
+    private static void WriteToProlog(ArrayList<Pool> pools) {
 
         try {
             File database = new File("resources/database.pl");
