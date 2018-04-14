@@ -11,7 +11,6 @@ import (
 )
 
 func main() {
-
 	//read file, exits program if error
 	bFile, err := ioutil.ReadFile("database.txt")
 	if err != nil {
@@ -56,32 +55,25 @@ func main() {
 		pools = pools[1:] //delete child
 	}
 
+	//prepare solution
 	pools = tree.getPreOrder()
 	var strSolution string
 	var distanceTravelled float64 = 0
-
 	for i, pool := range pools {
 		strSolution += pool.name + " " + strconv.FormatFloat(distanceTravelled, 'E', -1, 64) + "\n"
 		if (i+1) < len(pools) { distanceTravelled += pool.distanceFrom(pools[i+1]) }
 	}
 
+	// write the solution
 	fmt.Print(strSolution)
-
-	// write the solution to file
 	err = ioutil.WriteFile("solution.txt", []byte(strSolution), 0644)
 	if err != nil {
 		panic("error writing the solution")
 	}
-
 }
 
-//Tree
-type Tree struct {
-	pool     *Pool
-	children []*Tree
-	parent   *Tree
-}
-
+//Tree Structure
+type Tree struct { pool *Pool; children []*Tree; parent *Tree }
 func plantTree(pool *Pool) (root *Tree) { return &Tree{pool, nil, nil} }
 func (parent *Tree) setPool(pool *Pool) { parent.pool = pool }
 func (node *Tree) setParent(parent *Tree) { node.parent = parent }
@@ -101,11 +93,8 @@ func buildTreeList(node *Tree, tree *[]*Tree) {
 	}
 }
 
-//Pool
-type Pool struct {
-	name string
-	longitude, latitude, distanceToParent, distanceToRoot float64
-}
+//Pool Structure
+type Pool struct { name string; longitude, latitude, distanceToParent, distanceToRoot float64 }
 func newPool(name string, longitude, latitude float64) *Pool { return &Pool{name, longitude, latitude, 0, 0} }
 func (pool *Pool) setDistanceToParent(distanceToParent float64) { pool.distanceToParent = distanceToParent }
 func (pool *Pool) setDistanceToRoot(distanceToRoot float64) { pool.distanceToRoot = distanceToRoot }
